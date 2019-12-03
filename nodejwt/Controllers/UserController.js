@@ -198,8 +198,24 @@ exports.ProfileAreaJwt = async function(req, res) {
 exports.EmployeesAreaJwt = async function(req, res) {
   let reqInfo = await RequestService.jwtReqHelper(req, ["HR", "Manager"]);
   let users = await _userRepo.allUsers();
+
+  // declaring a new array to hold user objects without salary
+  let secureEmployeesArray = [];
+
+  // unpacking mongoose model into regular json object
+  // pushing into array and hiding the salary
+  for (i in users) {
+    secureEmployeesArray.push(JSON.parse(JSON.stringify(users[i])));
+    secureEmployeesArray[i].salary =
+      "Only HR users can view salary in payroll page";
+  }
+
   if (reqInfo.rolePermitted) {
-    res.json({ errorMessage: "", reqInfo: reqInfo, users: users });
+    res.json({
+      errorMessage: "",
+      reqInfo: reqInfo,
+      users: secureEmployeesArray
+    });
   } else {
     res.json({
       errorMessage:
