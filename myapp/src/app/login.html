@@ -1,0 +1,17 @@
+<!-- Login -->
+<div class="container">
+  <table>
+    <tr>
+      <th>Login name:</th>
+      <td><input type="text" [(ngModel)]="username" /></td>
+    </tr>
+    <tr>
+      <th>Password:</th>
+      <td><input type="text" [(ngModel)]="password" /><br /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="button" value="login" (click)="login()" /></td>
+    </tr>
+  </table>
+</div>

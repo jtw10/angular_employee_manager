@@ -1,0 +1,206 @@
+<div class="container">
+  <h3 class="text-center">Register</h3>
+</div>
+
+<form #register="ngForm">
+  <div class="container">
+    <table class="table">
+      <tr>
+        <th>Username (Required)</th>
+        <td>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="username"
+            [(ngModel)]="username"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>First Name (Required)</th>
+        <td>
+          <input
+            type="text"
+            placeholder="Enter First Name"
+            name="firstName"
+            pattern="[a-zA-Z'-]*"
+            minlength="2"
+            [(ngModel)]="firstName"
+            #first="ngModel"
+            required
+          />
+        </td>
+        <div [hidden]="first.valid || first.pristine">
+          <div
+            *ngIf="first?.errors?.required"
+            class="alert alert-danger"
+            role="alert"
+          >
+            This field is required.
+          </div>
+
+          <div
+            *ngIf="first?.errors?.pattern"
+            class="alert alert-danger"
+            role="alert"
+          >
+            Only alphabetical characters are allowed.
+          </div>
+
+          <div
+            *ngIf="first?.errors?.minlength"
+            class="alert alert-danger"
+            role="alert"
+          >
+            This entry must have at least two characters.
+          </div>
+        </div>
+      </tr>
+      <tr>
+        <th>Last Name (Required)</th>
+        <td>
+          <input
+            type="text"
+            placeholder="Enter Last Name"
+            name="lastName"
+            pattern="[a-zA-Z'-]*"
+            minlength="2"
+            [(ngModel)]="lastName"
+            #last="ngModel"
+            required
+          />
+        </td>
+        <div [hidden]="last.valid || last.pristine">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="last?.errors?.required"
+          >
+            This field is required.
+          </div>
+
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="last?.errors?.pattern"
+          >
+            Only alphabetical characters are allowed.
+          </div>
+
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="last?.errors?.minlength"
+          >
+            This entry must have at least two characters.
+          </div>
+        </div>
+      </tr>
+      <tr>
+        <th>Street Address (Required)</th>
+        <td>
+          <input
+            type="text"
+            placeholder="Enter Address"
+            name="streetAddress"
+            [(ngModel)]="streetAddress"
+            #street="ngModel"
+            required
+          />
+        </td>
+        <div [hidden]="street.valid || street.pristine">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="street?.errors?.required"
+          >
+            This field is required.
+          </div>
+        </div>
+      </tr>
+      <tr>
+        <th>Email (Optional)</th>
+        <td>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+            name="email"
+            [(ngModel)]="email"
+            #userEmail="ngModel"
+          />
+        </td>
+        <div [hidden]="userEmail.valid || userEmail.pristine">
+          <div
+            *ngIf="userEmail?.errors?.pattern"
+            class="alert alert-danger"
+            role="alert"
+          >
+            Please enter a valid e-mail.
+          </div>
+        </div>
+      </tr>
+      <tr>
+        <th>Phone (Optional)</th>
+        <td>
+          <input
+            type="text"
+            placeholder="Enter Phone Number"
+            pattern="^[0-9]\d{2}-\d{3}-\d{4}$"
+            value="{{ phone }}"
+            name="phone"
+            [(ngModel)]="phone"
+            #phoneNumber="ngModel"
+          />
+        </td>
+        <div [hidden]="phoneNumber.valid || phoneNumber.pristine">
+          <div
+            *ngIf="phoneNumber?.errors?.pattern"
+            class="alert alert-danger"
+            role="alert"
+          >
+            Please enter a valid phone number. Format is XXX-XXX-XXXX
+          </div>
+        </div>
+      </tr>
+      <tr>
+        <th>Password</th>
+        <td>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            [(ngModel)]="password"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>Password Confirm</th>
+        <td>
+          <input
+            type="password"
+            name="password_confirm"
+            placeholder="Confirm Password"
+            [(ngModel)]="password_confirm"
+            required
+          />
+        </td>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td></td>
+        <td>
+          <button
+            type="submit"
+            [disabled]="!register.form.valid"
+            (click)="registerNewUser()"
+          >
+            Submit
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</form>

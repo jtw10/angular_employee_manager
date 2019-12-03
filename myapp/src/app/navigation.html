@@ -1,0 +1,18 @@
+<div class="container">
+  <br />
+  <nav>
+    <a routerLink="/employees" routerLinkActive="active">Employees</a>
+    |
+    <a routerLink="/payroll" routerLinkActive="active">Payroll</a>
+    |
+    <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    |
+    <a href="#" (click)="logout()">Logout</a>
+    |
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+    |
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+  </nav>
+  <!-- Where router should display a view -->
+  <router-outlet></router-outlet>
+</div>
